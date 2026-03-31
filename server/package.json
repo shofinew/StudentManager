@@ -1,0 +1,26 @@
+{
+    "name": "student-manager-server",
+    "version": "1.0.0",
+    "description": "Student Manager Backend API",
+    "main": "index.js",
+    "type": "module",
+    "scripts": {
+        "start": "node index.js",
+        "dev": "nodemon index.js"
+    },
+    "keywords": [
+        "student",
+        "manager",
+        "api"
+    ],
+    "author": "",
+    "license": "ISC",
+    "dependencies": {
+        "dotenv": "^17.3.1",
+        "express": "^5.2.1",
+        "mongoose": "^9.3.3"
+    },
+    "devDependencies": {
+        "nodemon": "^3.0.1"
+    }
+}
