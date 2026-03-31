@@ -1,5 +1,6 @@
 import mongoose from "mongoose";
 
+
 const connectDB = async () => {
     const mongoUri = process.env.MONGO_URI || process.env.URI;
 
@@ -9,7 +10,9 @@ const connectDB = async () => {
         );
     }
 
-    await mongoose.connect(mongoUri);
+    await mongoose.connect(mongoUri, {
+        dbName: "universityDB",
+    });
     console.log("MongoDB connected");
 };
 

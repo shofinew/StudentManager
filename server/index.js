@@ -5,6 +5,7 @@ import dotenv from "dotenv";
 import express from "express";
 
 import connectDB from "./config/db.js";
+import Student from "./models/Student.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -18,6 +19,42 @@ app.use(express.json());
 
 app.get("/", (_req, res) => {
     res.send("Student Manager API is running");
+});
+
+app.post("/api/students", async (req, res) => {
+    try {
+        const { name, age, dep, country } = req.body;
+
+        const student = await Student.create({
+            name,
+            age: Number(age),
+            dep,
+            country,
+        });
+
+        res.status(201).json({
+            message: "Student inserted successfully",
+            student,
+        });
+    } catch (error) {
+        res.status(400).json({
+            message: "Failed to insert student",
+            error: error.message,
+        });
+    }
+});
+
+app.get("/api/students", async (_req, res) => {
+    try {
+        const students = await Student.find().sort({ _id: -1 });
+
+        res.json(students);
+    } catch (error) {
+        res.status(500).json({
+            message: "Failed to fetch students",
+            error: error.message,
+        });
+    }
 });
 
 const startServer = async () => {
